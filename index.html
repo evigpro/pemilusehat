@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0065a0, #2196f3); /* Gradient biru */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 40px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            color: #2196f3;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        input {
+            padding: 15px;
+            font-size: 16px;
+            width: 80%;
+            margin-bottom: 15px;
+            border: 2px solid #00bcd4;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            background-color: #f0f8ff;
+        }
+        input:focus {
+            border-color: #2196f3;
+            outline: none;
+            transform: scale(1.05); /* Efek saat fokus */
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+        button {
+            padding: 15px 30px;
+            background-color: #2196f3;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 85%;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #1976d2;
+        }
+        .error {
+            color: #f44336;
+            font-size: 14px;
+            margin-top: 15px;
+            transition: opacity 0.3s ease;
+        }
+        .success {
+            color: #4caf50;
+            font-size: 14px;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .success.visible {
+            opacity: 1;
+            transform: translateY(10px); /* Efek muncul ke bawah */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Masukkan Kode Undangan Anda:</h1>
+        <input type="text" id="tokenInput" placeholder="Kode Undangan">
+        <button onclick="checkToken()">Verifikasi</button>
+        <div class="error" id="errorMessage"></div>
+        <div class="success" id="successMessage">Token berhasil! Mengarahkan...</div>
+    </div>
+
+    <script>
+        // Daftar token yang valid
+        const validTokens = [
+            "VGR20249", "VPR94202", "RPV20304", "WDP90809", "PNG89902", 
+            "JJK90123", "WWK89900", "KLM99880", "LLK56678", "YEA90909", 
+            "HJY90809", "WRA19918", "DTS28825", "FYD37737", "GUF46641", 
+            "HIG55553", "JAH64461", "KSJ73371", "LDK82281", "MFL91198"
+        ];
+
+        function checkToken() {
+            const userInput = document.getElementById("tokenInput").value;
+            const errorMessage = document.getElementById("errorMessage");
+            const successMessage = document.getElementById("successMessage");
+
+            // Reset pesan
+            errorMessage.textContent = '';
+            successMessage.classList.remove('visible'); // Sembunyikan pesan sebelumnya
+
+            // Memeriksa apakah token valid
+            if (validTokens.includes(userInput)) {
+                successMessage.classList.add('visible'); // Menampilkan pesan keberhasilan
+                setTimeout(function() {
+                    window.location.href = "next.html"; // Arahkan ke halaman berikutnya
+                }, 2500); // Menunggu 1,5 detik sebelum mengarahkan
+            } else {
+                errorMessage.textContent = "Token salah! Silakan coba lagi.";
+            }
+        }
+    </script>
+</body>
+</html>
